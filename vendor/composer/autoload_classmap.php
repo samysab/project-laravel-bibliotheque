@@ -30,6 +30,8 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Models\\Book' => $baseDir . '/app/Models/Book.php',
+    'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
+    'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',
     'App\\Models\\Film' => $baseDir . '/app/Models/Film.php',
     'App\\Models\\Genre' => $baseDir . '/app/Models/Genre.php',
     'App\\Models\\Post' => $baseDir . '/app/Models/Post.php',
