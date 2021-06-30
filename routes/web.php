@@ -89,4 +89,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+Route::get('/livre/{book_id}',
+    [BookController::class, 'displayComments']
+)->name('comment');
+
 require __DIR__.'/auth.php';

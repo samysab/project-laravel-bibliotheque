@@ -19,7 +19,8 @@ class BookController extends Controller
         return view('books', ['books' => $books]);
     }
 
-    function saveBook(Request $request){
+    function saveBook(Request $request)
+    {
 
         $bookSave = new Book();
         $bookSave->name = $request->name;
@@ -28,4 +29,16 @@ class BookController extends Controller
 
         return redirect('/livres');
     }
+
+
+    function displayComments(Request $request){
+
+        $book = Book::find($request->book_id);
+        $comments = $book->comments;
+
+        return view('infoBook', ['comments' => $comments]);
+
+    }
 }
+
+
