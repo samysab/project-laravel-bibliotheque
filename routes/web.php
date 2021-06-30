@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\BookController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,12 @@ use App\Http\Controllers\FilmController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
+
+
+
 
 
 Route::get('/films',
@@ -62,10 +70,10 @@ Route::get('/plip/{truc?}',
 )->middleware(['auth'])->name('plip');
 
 
+Route::get('/',
+    [BookController::class, 'displayBooks']
+)->name('displayBooks');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
