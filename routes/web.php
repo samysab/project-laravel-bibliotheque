@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\FilmController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,25 @@ Route::get('/films',
 
 
 
+// USER
 
+Route::post('/create-user',
+    [UserController::class, 'createUser']
+)->middleware(['auth'])->name('create-user');
+
+Route::get('/create-user',
+    [UserController::class, 'formUser']
+)->middleware(['auth'])->name('create-user');
+
+
+Route::get('/users',
+    [UserController::class, 'showUsers']
+)->middleware(['auth'])->name('users');
+
+
+Route::get('/delete/{user_id}', //url
+    [UserController::class, 'deleteUser'] //nom de la methode
+)->middleware(['auth'])->name('delete'); //Nom de la route (route('')
 
 
 // ====================
