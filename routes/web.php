@@ -20,6 +20,9 @@ Route::get('/category',
     [\App\Http\Controllers\CategoryController::class, 'index']
 )->middleware(['auth'])->name('category');
 
+Route::get('/delete-category/{category_id}', //url
+    [\App\Http\Controllers\CategoryController::class, 'delete'] //nom de la methode
+)->middleware(['auth'])->name('delete'); //Nom de la route (route('')
 
 
 
@@ -56,9 +59,9 @@ Route::post('/save',
 )->middleware(['auth'])->name('save');
 
 
-Route::get('/delete/{post_id}', //url
+/*Route::get('/delete/{post_id}', //url
     [WallController::class, 'delete'] //nom de la methode
-)->middleware(['auth'])->name('delete'); //Nom de la route (route('')
+)->middleware(['auth'])->name('delete'); //Nom de la route (route('')*/
 
 
 // ------------------------

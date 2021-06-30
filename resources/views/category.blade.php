@@ -17,6 +17,7 @@
                     <ul>
                         @foreach ($category as $categories)
                             <li> {{ $categories->name }}
+                                [<a href="{{ route('delete', $categories->id) }}">delete </a>]
                               {{--  @if(isset($categories->genre))
                                     <i><b>({{$categories->genre->nom}}</b></i>)
                                 @endif--}}

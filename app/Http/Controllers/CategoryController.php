@@ -15,4 +15,13 @@ class CategoryController extends Controller
 
         return view('category', ['category' => $categories]);
     }
+
+    //Supprime le post
+    function delete(Request $request){
+
+        $post = Category::find($request->category_id);
+        $post->delete();
+
+        return redirect('category')->with('status', 'category Deleted !');
+    }
 }
