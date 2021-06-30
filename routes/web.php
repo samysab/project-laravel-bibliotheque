@@ -16,6 +16,10 @@ use App\Http\Controllers\BookController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/category',
+    [\App\Http\Controllers\CategoryController::class, 'index']
+)->middleware(['auth'])->name('category');
+
 
 
 
