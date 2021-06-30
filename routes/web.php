@@ -25,7 +25,13 @@ Route::get('/category',
 
 
 
+Route::get('/livres',
+    [\App\Http\Controllers\BookController::class, 'index']
+)->middleware(['auth'])->name('books');
 
+Route::post('/livres',
+    [\App\Http\Controllers\BookController::class, 'saveBook']
+)->middleware(['auth'])->name('saveBook');
 
 
 Route::get('/films',
