@@ -20,18 +20,21 @@ Route::get('/category',
     [\App\Http\Controllers\CategoryController::class, 'index']
 )->middleware(['auth'])->name('category');
 
+Route::get('/delete-category/{category_id}', //url
+    [\App\Http\Controllers\CategoryController::class, 'delete'] //nom de la methode
+)->middleware(['auth'])->name('delete'); //Nom de la route (route('')
+
+Route::post('/create-category',
+    [\App\Http\Controllers\CategoryController::class, 'post']
+)->middleware(['auth'])->name('create-category');
+
+Route::post('/save-category',
+    [\App\Http\Controllers\CategoryController::class, 'save']
+)->middleware(['auth'])->name('save-category');
 
 
 
 
-
-Route::get('/livres',
-    [\App\Http\Controllers\BookController::class, 'index']
-)->middleware(['auth'])->name('books');
-
-Route::post('/livres',
-    [\App\Http\Controllers\BookController::class, 'saveBook']
-)->middleware(['auth'])->name('saveBook');
 
 
 Route::get('/films',
@@ -62,9 +65,9 @@ Route::post('/save',
 )->middleware(['auth'])->name('save');
 
 
-Route::get('/delete/{post_id}', //url
+/*Route::get('/delete/{post_id}', //url
     [WallController::class, 'delete'] //nom de la methode
-)->middleware(['auth'])->name('delete'); //Nom de la route (route('')
+)->middleware(['auth'])->name('delete'); //Nom de la route (route('')*/
 
 
 // ------------------------
