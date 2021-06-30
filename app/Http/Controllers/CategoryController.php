@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -19,9 +20,20 @@ class CategoryController extends Controller
     //Supprime le post
     function delete(Request $request){
 
-        $post = Category::find($request->category_id);
-        $post->delete();
+        $category = Category::find($request->category_id);
+        $category->delete();
 
         return redirect('category')->with('status', 'category Deleted !');
+    }
+
+    //recevoir un post depuis un formulaire et le save en BDD
+    function post(Request $request){
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
+
+        return redirect('category');
     }
 }

@@ -42,7 +42,7 @@ class WallController extends Controller
     function save(Request $request){
 
         $post = Post::find($request->post_id);
-        $post->content = $request->content;
+        $post->content = $request->name;
         $post->save();
 
         return redirect('/wall')->with('status', 'Post Updated !');

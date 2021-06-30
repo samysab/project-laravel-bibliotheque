@@ -14,6 +14,11 @@
                     </div>
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
+                    {!! Form::open(['route' => 'create-category']) !!}
+                        {!! Form::text('name') !!}
+                        {!! Form::text('description') !!}
+                        {!! Form::submit('Créer la categorie'); !!}
+                    {!! Form::close() !!}
                     <ul>
                         @foreach ($category as $categories)
                             <li> {{ $categories->name }}

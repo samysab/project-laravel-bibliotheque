@@ -24,7 +24,13 @@ Route::get('/delete-category/{category_id}', //url
     [\App\Http\Controllers\CategoryController::class, 'delete'] //nom de la methode
 )->middleware(['auth'])->name('delete'); //Nom de la route (route('')
 
+Route::post('/create-category',
+    [\App\Http\Controllers\CategoryController::class, 'post']
+)->middleware(['auth'])->name('create-category');
 
+Route::post('/save-category',
+    [\App\Http\Controllers\CategoryController::class, 'save']
+)->middleware(['auth'])->name('save-category');
 
 
 
