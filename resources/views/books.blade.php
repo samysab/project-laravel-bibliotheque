@@ -18,20 +18,18 @@
                     {!! Form::open(['route' => 'saveBook']) !!}
                         {!! Form::text('name') !!}
                         {!! Form::textarea('description') !!}
-                        {!! Form::select('category') !!}
+                        {!! Form::select('size', $category) !!}
                     {!! Form::submit('Ajouter'); !!}
                     {!! Form::close() !!}
                     <br><br>
                     <ul>
                         @foreach ($books as $book)
-                            <li> {{ $book->name }}</b></i>)
+                            <li> {{ $book->name }}</b></i>
                             [<a href="{{ route('update', $book->id) }}">update </a>]
                             [<a href="{{ route('delete', $book->id) }}">delete </a>]
                             </li>
                         @endforeach
                     </ul>
-
-
                 </div>
             </div>
         </div>

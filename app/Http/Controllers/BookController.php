@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -15,8 +16,16 @@ class BookController extends Controller
 
     function index(){
         $books = Book::all();
+        $category = Category::all();
+        //ddd($category);
 
-        return view('books', ['books' => $books]);
+        $select = [];
+
+        foreach($category as $cat){
+            $select[] = $cat->name;
+        }
+
+        return view('books')->with(['books' => $books])->with(['category' => $select]);
     }
 
     function saveBook(Request $request){
@@ -24,6 +33,7 @@ class BookController extends Controller
         $bookSave = new Book();
         $bookSave->name = $request->name;
         $bookSave->description = $request->description;
+        $bookSave->category = $request->category;
         $bookSave->save();
 
         return redirect('/livres');
