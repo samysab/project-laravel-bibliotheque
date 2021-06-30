@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Listes des catégories
+            Gestion des livres
         </h2>
     </x-slot>
 
@@ -14,17 +14,22 @@
                     </div>
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <h1>Gestion des livres</h1>
+                    {!! Form::open(['route' => 'saveBook']) !!}
+                        {!! Form::text('name') !!}
+                        {!! Form::textarea('description') !!}
+                        {!! Form::select('category') !!}
+                    {!! Form::submit('Ajouter'); !!}
+                    {!! Form::close() !!}
+                    <br><br>
                     <ul>
-                        @foreach ($category as $categories)
-                            <li> {{ $categories->name }}
-                              {{--  @if(isset($categories->genre))
-                                    <i><b>({{$categories->genre->nom}}</b></i>)
-                                @endif--}}
+                        @foreach ($books as $book)
+                            <li> {{ $book->name }}</b></i>)
+                            [<a href="{{ route('update', $book->id) }}">update </a>]
+                            [<a href="{{ route('delete', $book->id) }}">delete </a>]
                             </li>
                         @endforeach
                     </ul>
-                    <br>
-                    {{--                    {{ $films->links() }}--}}
 
 
                 </div>
