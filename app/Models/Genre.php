@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     use HasFactory;
+    // use HasFactory;
+    // use HasFactory;
+    // use HasFactory;
+    // use HasFactory;
 
     protected $primaryKey = 'id_genre';
 }
