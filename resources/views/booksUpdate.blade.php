@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Gestion des livres
+            Modification du livre
         </h2>
     </x-slot>
 
@@ -14,22 +14,13 @@
                     </div>
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h1>Gestion des livres</h1>
+                    <h1>Modification du livre</h1>
                     {!! Form::open(['route' => 'saveBook']) !!}
-                        {!! Form::text('name') !!}
-                        {!! Form::textarea('description') !!}
+                        {!! Form::text('name', $book->name) !!}
+                        {!! Form::textarea('description', $book->description) !!}
                         {!! Form::select('category', $categoryName) !!}
                     {!! Form::submit('Ajouter'); !!}
                     {!! Form::close() !!}
-                    <br><br>
-                    <ul>
-                        @foreach ($books as $book)
-                            <li> {{ $book->name }}</b></i>
-                            [<a href="{{ route('updateBook', $book->id) }}">update </a>]
-                            [<a href="{{ route('deleteBook', $book->id) }} }}">delete </a>]
-                            </li>
-                        @endforeach
-                    </ul>
                 </div>
             </div>
         </div>
