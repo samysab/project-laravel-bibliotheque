@@ -53,7 +53,7 @@ class BookController extends Controller
         return redirect('livres')->with('status', 'Le livre a été supprimé !');
     }
 
-    function updateBook(Request $request){
+    function updateDisplayBook(Request $request){
         $category = Category::all();
 
         $arrayNameCategory = [];
@@ -71,5 +71,16 @@ class BookController extends Controller
 
         $bookUpdate = Book::find($request->book_id);
         return view('booksUpdate')->with(['book' => $bookUpdate])->with(['categoryName' => $selectCategory]);
+    }
+
+    function updateBook(Request $request){
+
+        $bookUpdate = Book::find($request->book_id);
+        $bookUpdate->name = $request->name;
+        $bookUpdate->description = $request->description;
+        $bookUpdate->category_id = $request->category;
+        $bookUpdate->save();
+
+        return redirect('livres')->with('status', 'Post Updated !');
     }
 }

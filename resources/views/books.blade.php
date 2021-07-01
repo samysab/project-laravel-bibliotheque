@@ -25,8 +25,9 @@
                     <ul>
                         @foreach ($books as $book)
                             <li> {{ $book->name }}</b></i>
-                            [<a href="{{ route('updateBook', $book->id) }}">update </a>]
-                            [<a href="{{ route('deleteBook', $book->id) }} }}">delete </a>]
+                            <li> {{ $book->description }}</b></i>
+                            [<a href="{{ route('updateDisplayBook', $book->id) }}">Modifier </a>]
+                            [<a href="{{ route('deleteBook', $book->id) }} }}">Supprimer </a>]
                             </li>
                         @endforeach
                     </ul>
