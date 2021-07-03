@@ -36,6 +36,16 @@ class BookController extends Controller
 
     function saveBook(Request $request){
 
+        if (empty($request->name)||
+            empty($request->description)||
+            empty($request->category)){
+            return redirect('livres')->with('status', 'Veuillez remplir tous les champs');
+        }
+
+        if(!Category::find($request->category)){
+            return redirect('livres')->with('status', 'Cette catégorie n\'existe pas');
+        }
+
         $bookSave = new Book();
         $bookSave->name = $request->name;
         $bookSave->description = $request->description;
@@ -54,6 +64,7 @@ class BookController extends Controller
     }
 
     function updateDisplayBook(Request $request){
+
         $category = Category::all();
 
         $arrayNameCategory = [];
@@ -74,6 +85,16 @@ class BookController extends Controller
     }
 
     function updateBook(Request $request){
+
+        if (empty($request->name)||
+            empty($request->description)||
+            empty($request->category)){
+            return redirect('livres')->with('status', 'Veuillez remplir tous les champs');
+        }
+
+        if(!Category::find($request->category)){
+            return redirect('livres')->with('status', 'Cette catégorie n\'existe pas');
+        }
 
         $bookUpdate = Book::find($request->book_id);
         $bookUpdate->name = $request->name;

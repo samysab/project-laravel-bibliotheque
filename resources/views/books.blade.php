@@ -19,6 +19,7 @@
                         {!! Form::text('name') !!}
                         {!! Form::textarea('description') !!}
                         {!! Form::select('category', $categoryName) !!}
+                        {!! Form::file('image') !!}
                     {!! Form::submit('Ajouter'); !!}
                     {!! Form::close() !!}
                     <br><br>
