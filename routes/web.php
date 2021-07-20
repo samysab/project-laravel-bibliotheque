@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WallController;
 use App\Http\Controllers\FilmController;
@@ -71,6 +72,12 @@ Route::post('/save',
 )->middleware(['auth'])->name('save');
 
 
+
+Route::get('/delete-comment/{comment_id}', //url
+    [CommentController::class, 'delete'] //nom de la methode
+)->middleware(['auth'])->name('deleteComment'); //Nom de la route (route('')
+
+
 /*Route::get('/delete/{post_id}', //url
     [WallController::class, 'delete'] //nom de la methode
 )->middleware(['auth'])->name('delete'); //Nom de la route (route('')*/
@@ -102,5 +109,10 @@ Route::get('/dashboard', function () {
 Route::get('/livre/{book_id}',
     [BookController::class, 'displayComments']
 )->name('comment');
+
+
+Route::post('/saveComment',
+    [CommentController::class, 'save']
+)->name('create-comment');
 
 require __DIR__.'/auth.php';
