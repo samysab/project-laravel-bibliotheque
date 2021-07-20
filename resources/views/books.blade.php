@@ -14,24 +14,31 @@
                     </div>
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
+                    @if ($errors->has('description'))
+                        <br><div style="color: red" class="alert alert-success">{{ $errors->first('description') }}</div>
+                    @endif
+                    @if ($errors->has('name'))
+                        <div style="color: red" class="alert alert-success">{{ $errors->first('name') }}</div>
+                    @endif
+                    {!! Form::open(['route' => 'create-category']) !!}
                     <h1>Gestion des livres</h1>
-                    {!! Form::open(['route' => 'saveBook']) !!}
+                    {!! Form::open(['route' => 'saveBook','files' => true], '') !!}
                         {!! Form::text('name') !!}
                         {!! Form::textarea('description') !!}
-                        {!! Form::select('category') !!}
+                        {!! Form::select('category', $categoryName) !!}
+                        {!! Form::file('image') !!}
                     {!! Form::submit('Ajouter'); !!}
                     {!! Form::close() !!}
                     <br><br>
                     <ul>
                         @foreach ($books as $book)
-                            <li> {{ $book->name }}</b></i>)
-                            [<a href="{{ route('update', $book->id) }}">update </a>]
-                            [<a href="{{ route('delete', $book->id) }}">delete </a>]
+                            <li> {{ $book->name }}</b></i>
+                            <li> {{ $book->description }}</b></i>
+                            [<a href="{{ route('updateDisplayBook', $book->id) }}">Modifier </a>]
+                            [<a href="{{ route('deleteBook', $book->id) }} }}">Supprimer </a>]
                             </li>
                         @endforeach
                     </ul>
-
-
                 </div>
             </div>
         </div>

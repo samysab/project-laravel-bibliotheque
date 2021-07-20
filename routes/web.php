@@ -49,6 +49,19 @@ Route::post('/livres',
     [\App\Http\Controllers\BookController::class, 'saveBook']
 )->middleware(['auth'])->name('saveBook');
 
+Route::get('/suppresion-livre/{book_id}',
+    [\App\Http\Controllers\BookController::class, 'deleteBook']
+)->middleware(['auth'])->name('deleteBook');
+
+Route::get('/modification-livre/{book_id}',
+    [\App\Http\Controllers\BookController::class, 'updateDisplayBook']
+)->middleware(['auth'])->name('updateDisplayBook');
+
+Route::post('/sauvegarde-livres',
+    [\App\Http\Controllers\BookController::class, 'updateBook']
+)->middleware(['auth'])->name('updateBook');
+
+
 
 Route::get('/films',
     [FilmController::class, 'index']
