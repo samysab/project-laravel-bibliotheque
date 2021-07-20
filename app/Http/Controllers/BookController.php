@@ -44,6 +44,17 @@ class BookController extends Controller
             return redirect('livres')->with('status', 'Veuillez remplir tous les champs');
         }
 
+        $request->validate([
+            'name' => ['required', 'max:255', 'min: 2'],
+            'description' => ['required', 'min: 10', 'max: 255'],
+        ],
+            [ 'name.required' => 'Le champs :attribute est requis.',
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min'
+
+            ]
+        );
+
         if(!Category::find($request->category)){
             return redirect('livres')->with('status', 'Cette catégorie n\'existe pas');
         }
@@ -108,6 +119,17 @@ class BookController extends Controller
             empty($request->category)){
             return redirect('livres')->with('status', 'Veuillez remplir tous les champs');
         }
+
+        $request->validate([
+            'name' => ['required', 'max:255', 'min: 2'],
+            'description' => ['required', 'min: 10', 'max: 255'],
+        ],
+            [ 'name.required' => 'Le champs :attribute est requis.',
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min'
+
+            ]
+        );
 
         if(!Category::find($request->category)){
             return redirect('livres')->with('status', 'Cette catégorie n\'existe pas');
