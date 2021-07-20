@@ -32,6 +32,13 @@ Route::post('/save-category',
     [\App\Http\Controllers\CategoryController::class, 'save']
 )->middleware(['auth'])->name('save-category');
 
+Route::get('/update/{category_id}',
+    [\App\Http\Controllers\CategoryController::class, 'update']
+)->middleware(['auth'])->name('update');
+
+Route::post('/save',
+    [\App\Http\Controllers\CategoryController::class, 'save']
+)->middleware(['auth'])->name('save');
 
 
 Route::get('/livres',
@@ -80,14 +87,14 @@ Route::post('/wall',
     [WallController::class, 'post']
 )->middleware(['auth'])->name('post');
 
-Route::get('/update/{post_id}',
+/*Route::get('/update/{post_id}',
     [WallController::class, 'update']
 )->middleware(['auth'])->name('update');
 
 Route::post('/save',
     [WallController::class, 'save']
 )->middleware(['auth'])->name('save');
-
+*/
 
 /*Route::get('/delete/{post_id}', //url
     [WallController::class, 'delete'] //nom de la methode

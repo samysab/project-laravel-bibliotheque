@@ -21,7 +21,8 @@
                     {!! Form::close() !!}
                     <ul>
                         @foreach ($category as $categories)
-                            <li> {{ $categories->name }}
+                            <li> {{ $categories->name }} {{ $categories->description }}
+                                [<a href="{{ route('update', $categories->id) }}">update </a>]
                                 [<a href="{{ route('delete', $categories->id) }}">delete </a>]
                               {{--  @if(isset($categories->genre))
                                     <i><b>({{$categories->genre->nom}}</b></i>)

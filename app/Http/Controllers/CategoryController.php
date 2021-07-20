@@ -36,4 +36,22 @@ class CategoryController extends Controller
 
         return redirect('category');
     }
+
+    function update(Request $request){
+
+        $category = Category::find($request->category_id);
+        return view('categoryUpdate', ['category' => $category]);
+    }
+
+    //recoit le form de MaJ d'un post
+    function save(Request $request){
+
+        $category = Category::find($request->category_id);
+        $category->name = $request->name;
+        $category->description = $request->description;
+
+        $category->save();
+
+        return redirect('/category')->with('status', 'Category Updated !');
+    }
 }
