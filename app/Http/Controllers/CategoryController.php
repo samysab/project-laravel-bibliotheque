@@ -33,8 +33,8 @@ class CategoryController extends Controller
             'description' => ['required', 'min: 10', 'max: 255'],
         ],
             [ 'name.required' => 'Le champs :attribute est requis.',
-                'max' => 'Le champs :attribute ne doit pas comporter plus de :max',
-                'min' => 'Le champs :attribute ne doit pas comporter moins de :min'
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres'
 
             ]
         );
