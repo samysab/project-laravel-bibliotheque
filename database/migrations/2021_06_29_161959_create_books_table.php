@@ -18,6 +18,7 @@ class CreateBooksTable extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
             $table->integer('category_id');
+            $table->string('path')->nullable();
 
             $table->timestamps();
         });

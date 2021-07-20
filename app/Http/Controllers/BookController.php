@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -46,10 +47,25 @@ class BookController extends Controller
             return redirect('livres')->with('status', 'Cette catégorie n\'existe pas');
         }
 
+        if (!empty($request->image)){
+            $fileName = time().'.'.$request->image->extension();
+
+            $request->file('image')->storeAs(
+                'images',
+                $fileName,
+                'public'
+            );
+        }
+
+
+
         $bookSave = new Book();
         $bookSave->name = $request->name;
         $bookSave->description = $request->description;
         $bookSave->category_id = $request->category;
+        if (!empty($fileName)){
+            $bookSave->path = $fileName;
+        }
         $bookSave->save();
 
         return redirect('livres')->with('status', 'Le livre a été ajouté !');
@@ -102,6 +118,6 @@ class BookController extends Controller
         $bookUpdate->category_id = $request->category;
         $bookUpdate->save();
 
-        return redirect('livres')->with('status', 'Post Updated !');
+        return redirect('livres')->with('status', 'Le livre a été modifié !');
     }
 }

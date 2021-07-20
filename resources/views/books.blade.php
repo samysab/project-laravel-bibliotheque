@@ -15,7 +15,7 @@
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1>Gestion des livres</h1>
-                    {!! Form::open(['route' => 'saveBook']) !!}
+                    {!! Form::open(['route' => 'saveBook','files' => true], '') !!}
                         {!! Form::text('name') !!}
                         {!! Form::textarea('description') !!}
                         {!! Form::select('category', $categoryName) !!}
