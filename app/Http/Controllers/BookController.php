@@ -37,14 +37,16 @@ class BookController extends Controller
 
     function saveBook(Request $request)
     {
-        
+
         $request->validate([
             'name' => ['required', 'max:255', 'min: 2'],
             'description' => ['required', 'min: 10', 'max: 255'],
+            'image' => ['file', 'mimes:png,jpeg,jpg']
         ],
             [ 'required' => 'Le champs :attribute est requis.',
                 'max' => 'Le champs :attribute ne doit pas comporter plus de :max',
-                'min' => 'Le champs :attribute ne doit pas comporter moins de :min'
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min',
+                'image.mimes' => 'Ce fichier n\'est pas image'
             ]
         );
 
