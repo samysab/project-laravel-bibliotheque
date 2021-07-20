@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
+use App\Mail\TestMarkdownMail;
 use App\Models\Book;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -29,6 +32,10 @@ class CommentController extends Controller
         $comment->book_id = $request->book_id;
 
         $comment->save();
+
+        $user = Auth::user();
+
+        Mail::to($user->email)->send(new TestMarkdownMail($user));
 
         return back()->with("success","Commentaire envoyé !");
 
