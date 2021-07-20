@@ -35,7 +35,8 @@ class BookController extends Controller
         return view('books')->with(['books' => $books])->with(['categoryName' => $selectCategory]);
     }
 
-    function saveBook(Request $request){
+    function saveBook(Request $request)
+    {
 
         if (empty($request->name)||
             empty($request->description)||
@@ -120,4 +121,16 @@ class BookController extends Controller
 
         return redirect('livres')->with('status', 'Le livre a été modifié !');
     }
+
+
+    function displayComments(Request $request){
+
+        $book = Book::find($request->book_id);
+        $comments = $book->comments;
+
+        return view('infoBook', ['comments' => $comments]);
+
+    }
 }
+
+
