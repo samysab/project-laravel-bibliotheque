@@ -20,7 +20,6 @@
                     @if ($errors->has('name'))
                         <div style="color: red" class="alert alert-success">{{ $errors->first('name') }}</div>
                     @endif
-                    {!! Form::open(['route' => 'create-category']) !!}
                     <h1>Gestion des livres</h1>
                     {!! Form::open(['route' => 'saveBook','files' => true], '') !!}
                         {!! Form::text('name') !!}
@@ -32,6 +31,9 @@
                     <br><br>
                     <ul>
                         @foreach ($books as $book)
+                            @if(!empty($book->path))
+                            <img src="{{asset('storage/images').'/'.$book->path}}">
+                            @endif
                             <li> {{ $book->name }}</b></i>
                             <li> {{ $book->description }}</b></i>
                             [<a href="{{ route('updateDisplayBook', $book->id) }}">Modifier </a>]

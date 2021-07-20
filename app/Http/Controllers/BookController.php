@@ -69,8 +69,6 @@ class BookController extends Controller
             );
         }
 
-
-
         $bookSave = new Book();
         $bookSave->name = $request->name;
         $bookSave->description = $request->description;
