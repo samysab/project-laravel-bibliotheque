@@ -14,9 +14,19 @@
                     </div>
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
+                    @if ($errors->has('description'))
+                        <br><div style="color: red" class="alert alert-success">{{ $errors->first('description') }}</div>
+                    @endif
+                    @if ($errors->has('name'))
+                            <div style="color: red" class="alert alert-success">{{ $errors->first('name') }}</div>
+                    @endif
                     {!! Form::open(['route' => 'create-category']) !!}
-                        {!! Form::text('name') !!}
+                    <div class="form-group">
+                    {!! Form::text('name') !!}
+
                         {!! Form::text('description') !!}
+
+                    </div>
                         {!! Form::submit('Créer la categorie'); !!}
                     {!! Form::close() !!}
                     <ul>

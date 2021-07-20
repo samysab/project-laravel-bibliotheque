@@ -28,10 +28,24 @@ class CategoryController extends Controller
 
     //recevoir un post depuis un formulaire et le save en BDD
     function post(Request $request){
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:255', 'min: 2'],
+            'description' => ['required', 'min: 10', 'max: 255'],
+        ],
+            [ 'name.required' => 'Le champs :attribute est requis.',
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min'
+
+            ]
+        );
 
         $category = new Category();
         $category->name = $request->name;
         $category->description = $request->description;
+
+
+
+
         $category->save();
 
         return redirect('category');
