@@ -146,6 +146,10 @@ class BookController extends Controller
     function displayComments(Request $request){
 
         $book = Book::find($request->book_id);
+
+        if ($book == null){
+          return redirect("/");
+        }
         $comments = $book->comments;
 
         return view('infoBook', ['comments' => $comments, 'book' => $book, 'id' => $request->book_id]);

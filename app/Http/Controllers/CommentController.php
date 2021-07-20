@@ -12,6 +12,17 @@ class CommentController extends Controller
     public function save(Request $request){
 
 
+         $request->validate([
+            'content' => ['required', 'max:255', 'min: 2'],
+        ],
+            [ 'required' => 'Le champs :attribute est requis.',
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres'
+
+            ]
+        );
+
+
         $comment = new Comment();
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
@@ -19,7 +30,7 @@ class CommentController extends Controller
 
         $comment->save();
 
-        return back();
+        return back()->with("success","Commentaire envoyé !");
 
 
     }
@@ -32,6 +43,6 @@ class CommentController extends Controller
 
         $comment->delete();
 
-        return redirect("/livre/$getBook");
+        return redirect("/livre/$getBook")->with("success","Commentaire supprimé");
     }
 }
