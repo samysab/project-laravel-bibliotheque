@@ -24,13 +24,38 @@ class UserController extends Controller
     }
 
     function createUser(Request $request){
+
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:255', 'min: 2', 'unique:users'],
+            'password' => 'required|confirmed|min:6',
+            'email' => ['required', 'unique:users'],
+            'isAuthor' => ['min:0','max:1','required']
+
+        ],
+            [
+                'name.required' => 'Le champs :attribute est requis.',
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
+
+                'password.required' => 'Entrez un mot de passe',
+                'confirmed' => 'Le mot de passe de confirmation ne correspond pas',
+                'password.min' => 'Votre mot de passe doit faire au minimum 6 caractères',
+
+                'email.required' => 'Entrez votre email',
+                'email.unique' => 'Adresse mail déjà existante',
+
+                'isAuthor.min' => 'Le statut soit 0 soit 1',
+                'isAuthor.max' => 'Le statut soit 0 soit 1',
+            ]
+        );
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->isAuthor = $request->isAuthor;
-        $user->save();
 
+        $user->save();
         return redirect('users');
     }
 

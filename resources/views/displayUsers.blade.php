@@ -13,6 +13,7 @@
                         {{ session('status') }}
                     </div>
                 @endif
+
                 <div class="p-6 bg-white border-b border-gray-200">
                     <ul>
                         @foreach ($users as $user)
