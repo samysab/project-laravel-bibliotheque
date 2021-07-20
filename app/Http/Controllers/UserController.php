@@ -10,7 +10,8 @@ class UserController extends Controller
 {
     //Display users
     function showUsers(){
-        $users = User::all();
+        $users = User::where('isAuthor', 1)
+                        ->get();
 
         return view('displayUsers', ['users' => $users]);
     }
@@ -19,7 +20,7 @@ class UserController extends Controller
     function formUser(){
         $users = User::all();
 
-        return view('formUser', ['users' => $users]);    
+        return view('formUser', ['users' => $users]);
     }
 
     function createUser(Request $request){
@@ -39,6 +40,28 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('users')->with('status', 'User Deleted !');
+    }
+
+    function updateUser(Request $request){
+        $user = User::find($request->user_id);
+
+        $data = User::where('id', $user->id)
+                ->update([
+                    "name" => $request->name,
+                    "email" => $request->email,
+                    "password" => Hash::make($request->password)
+                ]);
+
+        return redirect('users')->with('status', 'User updated !');
+    }
+
+    /*form to update user*/
+    function formUserUpdate(Request $request){
+        $user = User::find($request->user_id);
+        $data = User::where('id', $user->id)
+            ->get();
+
+        return view('displayUserUpdate', ['user' => $user]);
     }
 
 }

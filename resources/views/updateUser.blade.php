@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Liste des utilisateurs
+            Inscription
         </h2>
     </x-slot>
 
@@ -14,16 +14,15 @@
                     </div>
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <ul>
-                        @foreach ($users as $user)
-                            <li> {{ $user->name }}  </li>
-                            <li> {{ $user->email }}  </li>
-                            <li> {{ $user->isAuthor === 0 ? "Utilisateur standard" : "Auteur" }}  </li>
-                            <li> [<a href="{{ route('delete', $user->id) }}">delete </a>] </li>
-                            <li> [<a href="{{ route('update-user', $user->id) }}">Update </a>] </li>
-                            <br>
-                        @endforeach
-                    </ul>
+                    {!! Form::open(['route' => 'create-user']) !!}
+                    {!! Form::text('name') !!}
+                    {!! Form::email('email') !!}
+                    {!! Form::password('password') !!}
+                    {!! Form::password('password_confirmation') !!}
+                    {!! Form::number('isAuthor') !!}
+                    {!! Form::submit('Créer un utilisateur'); !!}
+                    {!! Form::close() !!}
+
                 </div>
             </div>
         </div>
