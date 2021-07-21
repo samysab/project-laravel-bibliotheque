@@ -19,7 +19,7 @@
                         @foreach ($users as $user)
                             <li> {{ $user->name }}  </li>
                             <li> {{ $user->email }}  </li>
-                            <li> {{ $user->isAuthor === 0 ? "Utilisateur standard" : "Auteur" }}  </li>
+                            <li> Auteur </li>
                             <li> [<a href="{{ route('delete', $user->id) }}">delete </a>] </li>
                             <li> [<a href="{{ route('update-user', $user->id) }}">Update </a>] </li>
                             <br>
