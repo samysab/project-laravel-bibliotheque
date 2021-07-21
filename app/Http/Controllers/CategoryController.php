@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $category = Category::find($request->category_id);
         $category->delete();
 
-        return redirect('category')->with('status', 'category Deleted !');
+        return redirect('category')->with('status', 'La catégorie a été supprimée');
     }
 
     //recevoir un post depuis un formulaire et le save en BDD
@@ -66,6 +66,6 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect('/category')->with('status', 'Category Updated !');
+        return redirect('/category')->with('status', 'La catégorie a été modifiée');
     }
 }
