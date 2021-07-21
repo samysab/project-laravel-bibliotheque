@@ -23,7 +23,6 @@
                     @if ($errors->has('image'))
                         <div style="color: red" class="alert alert-success">{{ $errors->first('image') }}</div>
                     @endif
-                    <h1>Gestion des livres</h1>
                     {!! Form::open(['route' => 'saveBook','files' => true, 'enctype' => 'multipart/form-data'], '') !!}
                         {!! Form::label('Nom') !!}
                         {!! Form::text('name') !!}

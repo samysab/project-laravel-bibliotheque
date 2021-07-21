@@ -14,10 +14,12 @@
                     </div>
                 @endif
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h1>Modification du livre</h1>
                     {!! Form::open(['route' => 'updateBook']) !!}
+                        {!! Form::label('Nom') !!}
                         {!! Form::text('name', $book->name) !!}
+                        {!! Form::label('Description') !!}
                         {!! Form::textarea('description', $book->description) !!}
+                        {!! Form::label('Catégorie') !!}
                         {!! Form::select('category', $categoryName) !!}
                         {!! Form::hidden('book_id', $book->id) !!}
                     {!! Form::submit('Modifier'); !!}
