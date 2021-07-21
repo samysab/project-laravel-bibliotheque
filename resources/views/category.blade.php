@@ -33,7 +33,7 @@
                         @foreach ($category as $categories)
                             <li> {{ $categories->name }} {{ $categories->description }}
                                 [<a href="{{ route('update', $categories->id) }}">update </a>]
-                                [<a href="{{ route('delete', $categories->id) }}">delete </a>]
+                                [<a href="{{ route('delete-category', $categories->id) }}">delete </a>]
                               {{--  @if(isset($categories->genre))
                                     <i><b>({{$categories->genre->nom}}</b></i>)
                                 @endif--}}

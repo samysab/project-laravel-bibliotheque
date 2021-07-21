@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
             'name' => ['required', 'max:255', 'min: 2', 'unique:users'],
             'password' => 'required|confirmed|min:6',
             'email' => ['required', 'unique:users'],
-            'isAuthor' => ['min:0','max:1','required']
+            'isAuthor' => ['required', Rule::in([0, 1])]
 
         ],
             [
