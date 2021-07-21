@@ -22,13 +22,16 @@
                     @endif
                     {!! Form::open(['route' => 'create-category']) !!}
                     <div class="form-group">
+                    {!! Form::label('Nom') !!}
                     {!! Form::text('name') !!}
+                    {!! Form::label('Description') !!}
                     {!! Form::textarea('description') !!}
                     </div>
                     {!! Form::submit('Créer la categorie'); !!}
                     {!! Form::close() !!}
                     <ul>
                         @foreach ($category as $categories)
+                            <br>
                             <li> {{ $categories->name }} {{ $categories->description }}
                                 [<a href="{{ route('update', $categories->id) }}">Modifier </a>]
                                 [<a href="{{ route('delete-category', $categories->id) }}">Supprimer </a>]
