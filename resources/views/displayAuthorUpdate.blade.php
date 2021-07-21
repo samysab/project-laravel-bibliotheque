@@ -13,6 +13,11 @@
                         {{ session('status') }}
                     </div>
                 @endif
+
+                @if ($errors->has('name'))
+                    <div style="color: red" class="alert alert-success">{{ $errors->first('name') }}</div>
+                @endif
+
                 <div class="p-6 bg-white border-b border-gray-200">
                     {!! Form::open(['route' => ['update-author', $author->id ]]) !!}
                     {!! Form::text('name', $author->name) !!}

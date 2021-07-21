@@ -39,27 +39,7 @@ class UserController extends Controller
 
     function createUser(Request $request){
 
-        $validatedData = $request->validate([
-            'name' => ['required', 'max:255', 'min: 2', 'unique:users'],
-            'password' => 'required|confirmed|min:6',
-            'email' => ['required', 'unique:users'],
-//            'isAuthor' => ['required', Rule::in([0])]
-
-        ],
-            [
-                'name.required' => 'Le champs :attribute est requis.',
-                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
-                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
-
-                'password.required' => 'Entrez un mot de passe',
-                'confirmed' => 'Le mot de passe de confirmation ne correspond pas',
-                'password.min' => 'Votre mot de passe doit faire au minimum 6 caractères',
-
-                'email.required' => 'Entrez votre email',
-                'email.unique' => 'Adresse mail déjà existante'
-            ]
-        );
-
+        self::checkUser($request);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -74,21 +54,7 @@ class UserController extends Controller
 
     function createAuthor(Request $request){
 
-        $user = new User();
-
-        $validatedData = $request->validate([
-            'name' => ['required', 'max:255', 'min: 2',
-                Rule::unique('users')->where(function ($query) {
-                    return $query->where('isAuthor', 1);
-                })],
-        ],
-            [
-                'name.required' => 'Le champs :attribute est requis.',
-                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
-                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
-
-            ]
-        );
+        self::checkAuthor($request);
 
         $user = new User();
         $user->name = $request->name;
@@ -120,6 +86,8 @@ class UserController extends Controller
     function updateUser(Request $request){
         $user = User::find($request->user_id);
 
+        self::checkUser($request);
+
         $data = User::where('id', $user->id)
             ->update([
                 "name" => $request->name,
@@ -132,6 +100,8 @@ class UserController extends Controller
 
     function updateAuthor(Request $request){
         $user = User::find($request->author_id);
+
+        self::checkAuthor($request);
 
         $data = User::where('id', $user->id)
             ->update([
@@ -156,6 +126,46 @@ class UserController extends Controller
             ->get();
 
         return view('displayAuthorUpdate', ['author' => $author]);
+    }
+
+    private static function checkUser(Request $request){
+
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:255', 'min: 2', 'unique:users'],
+            'password' => 'required|confirmed|min:6',
+            'email' => ['required', 'unique:users'],
+//            'isAuthor' => ['required', Rule::in([0])]
+
+        ],
+            [
+                'name.required' => 'Le champs :attribute est requis.',
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
+
+                'password.required' => 'Entrez un mot de passe',
+                'confirmed' => 'Le mot de passe de confirmation ne correspond pas',
+                'password.min' => 'Votre mot de passe doit faire au minimum 6 caractères',
+
+                'email.required' => 'Entrez votre email',
+                'email.unique' => 'Adresse mail déjà existante'
+            ]
+        );
+    }
+
+    private static function checkAuthor(Request $request){
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:255', 'min: 2',
+                Rule::unique('users')->where(function ($query) {
+                    return $query->where('isAuthor', 1);
+                })],
+        ],
+            [
+                'name.required' => 'Le champs :attribute est requis.',
+                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
+                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
+
+            ]
+        );
     }
 
 }
