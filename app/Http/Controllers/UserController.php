@@ -92,6 +92,8 @@ class UserController extends Controller
 
         $user = new User();
         $user->name = $request->name;
+        $user->email = "n/a";
+        $user->password = "n/a";
         $user->isAuthor = 1;
 
         $user->save();
