@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -88,6 +89,13 @@ class UserController extends Controller
             ->get();
 
         return view('displayUserUpdate', ['user' => $user]);
+    }
+
+    function myBooks(){
+
+        $myBooks = Auth::user()->UserBuyed;
+        return view('displayUserBooks',['books' => $myBooks]);
+
     }
 
 }
