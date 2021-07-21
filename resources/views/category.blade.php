@@ -23,11 +23,9 @@
                     {!! Form::open(['route' => 'create-category']) !!}
                     <div class="form-group">
                     {!! Form::text('name') !!}
-
-                        {!! Form::text('description') !!}
-
+                    {!! Form::textarea('description') !!}
                     </div>
-                        {!! Form::submit('Créer la categorie'); !!}
+                    {!! Form::submit('Créer la categorie'); !!}
                     {!! Form::close() !!}
                     <ul>
                         @foreach ($category as $categories)
