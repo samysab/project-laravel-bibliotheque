@@ -83,6 +83,14 @@ Route::get('/create-user',
     [UserController::class, 'formUser']
 )->middleware(['auth'])->name('create-user');
 
+Route::post('/create-author',
+    [UserController::class, 'createAuthor']
+)->middleware(['auth'])->name('create-author');
+
+Route::get('/create-author',
+    [UserController::class, 'formAuthor']
+)->middleware(['auth'])->name('create-author');
+
 
 //LIST OF USERS
 
@@ -90,11 +98,19 @@ Route::get('/users',
     [UserController::class, 'showUsers']
 )->middleware(['auth'])->name('users');
 
+Route::get('/authors',
+    [UserController::class, 'showAuthors']
+)->middleware(['auth'])->name('authors');
+
 //DELETE
 
-Route::get('/delete/{user_id}', //url
+Route::get('/delete-user/{user_id}', //url
     [UserController::class, 'deleteUser'] //nom de la methode
-)->middleware(['auth'])->name('delete'); //Nom de la route (route('')
+)->middleware(['auth'])->name('delete-user'); //Nom de la route (route('')
+
+Route::get('/delete-author/{author_id}', //url
+    [UserController::class, 'deleteAuthor'] //nom de la methode
+)->middleware(['auth'])->name('delete-author'); //Nom de la route (route('')
 
 //UPDATE USER
 
@@ -105,6 +121,14 @@ Route::post('/update-user/{user_id}',
 Route::get('/update-user/{user_id}',
     [UserController::class, 'formUserUpdate']
 )->middleware(['auth'])->name('update-user');
+
+Route::post('/update-author/{author_id}',
+    [UserController::class, 'updateAuthor']
+)->middleware(['auth'])->name('update-author');
+
+Route::get('/update-author/{author_id}',
+    [UserController::class, 'formAuthorUpdate']
+)->middleware(['auth'])->name('update-author');
 
 
 // ====================
