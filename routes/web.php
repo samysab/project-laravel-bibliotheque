@@ -6,6 +6,8 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookController;
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,7 @@ use App\Http\Controllers\BookController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/category',
     [\App\Http\Controllers\CategoryController::class, 'index']
 )->middleware(['auth'])->name('category');
@@ -71,6 +74,7 @@ Route::get('/films',
 
 // USER
 
+// CREATE USER
 Route::post('/create-user',
     [UserController::class, 'createUser']
 )->middleware(['auth'])->name('create-user');
@@ -80,14 +84,27 @@ Route::get('/create-user',
 )->middleware(['auth'])->name('create-user');
 
 
+//LIST OF USERS
+
 Route::get('/users',
     [UserController::class, 'showUsers']
 )->middleware(['auth'])->name('users');
 
+//DELETE
 
 Route::get('/delete/{user_id}', //url
     [UserController::class, 'deleteUser'] //nom de la methode
 )->middleware(['auth'])->name('delete'); //Nom de la route (route('')
+
+//UPDATE USER
+
+Route::post('/update-user/{user_id}',
+    [UserController::class, 'updateUser']
+)->middleware(['auth'])->name('update-user');
+
+Route::get('/update-user/{user_id}',
+    [UserController::class, 'formUserUpdate']
+)->middleware(['auth'])->name('update-user');
 
 
 // ====================
