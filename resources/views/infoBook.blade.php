@@ -36,6 +36,12 @@
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 
+        @if (session('success'))
+            <div style="color: green" class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -45,7 +51,8 @@
                         <p>Livre : {{ $book->name }}</p>
 
                         @if(isset($book->path))
-                            <img src="{{Storage::url($book->image->path)}}">
+
+                            <img  width="100" src="{{asset("storage/images" . "/" . $book->path)}}">
                         @endif
 
                         @if(isset($book->content))
@@ -53,6 +60,11 @@
                         @endif
 
                     </div>
+
+
+                    @if ($errors->has('content'))
+                        <div style="color: red" class="alert alert-success">{{ $errors->first('content') }}</div>
+                    @endif
 
 
                     @if(Auth::user())
