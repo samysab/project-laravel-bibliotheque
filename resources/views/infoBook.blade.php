@@ -50,6 +50,7 @@
                         <p>Livre : {{ $book->name }}</p>
 
                         @if(isset($book->path))
+
                             <img  width="100" src="{{asset("storage/images" . "/" . $book->path)}}">
                         @endif
 

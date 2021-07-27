@@ -42,8 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function books()
+    public function UserBuyed()
     {
-        return $this->hasMany(Book::class);
+        return $this->hasMany(User_book::class);
     }
 }

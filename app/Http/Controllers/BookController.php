@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\User_book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
     function displayBooks(){
         $books = Book::all();
-
         return view('displayBooks', ['books' => $books]);
     }
 
@@ -143,6 +144,23 @@ class BookController extends Controller
 
         return view('infoBook', ['comments' => $comments, 'book' => $book, 'id' => $request->book_id]);
 
+    }
+
+    function saveBookUser(Request $request){
+
+        $userBook = new User_book();
+
+        $verify = Book::find($request->book_id);
+        if ($verify == null){
+            return redirect("/");
+        }
+
+        $userBook->user_id = Auth::user()->id;
+        $userBook->book_id = $request->book_id;
+        $userBook->save();
+
+
+        return redirect("/")->with("status","Livre acheté");
     }
 }
 
