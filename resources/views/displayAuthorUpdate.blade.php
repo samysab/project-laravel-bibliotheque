@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Modification du livre
+            Modification de l'auteur : {{$author->name}}
         </h2>
     </x-slot>
 
@@ -13,17 +13,18 @@
                         {{ session('status') }}
                     </div>
                 @endif
+
+                @if ($errors->has('name'))
+                    <div style="color: red" class="alert alert-success">{{ $errors->first('name') }}</div>
+                @endif
+
                 <div class="p-6 bg-white border-b border-gray-200">
-                    {!! Form::open(['route' => 'updateBook']) !!}
-                        {!! Form::label('Nom') !!}
-                        {!! Form::text('name', $book->name) !!}
-                        {!! Form::label('Description') !!}
-                        {!! Form::textarea('description', $book->description) !!}
-                        {!! Form::label('Catégorie') !!}
-                        {!! Form::select('category', $categoryName) !!}
-                        {!! Form::hidden('book_id', $book->id) !!}
-                    {!! Form::submit('Modifier'); !!}
+                    {!! Form::open(['route' => ['update-author', $author->id ]]) !!}
+                    {!! Form::text('name', $author->name) !!}
+                    {!! Form::submit('Modifier cet auteur'); !!}
                     {!! Form::close() !!}
+
+
                 </div>
             </div>
         </div>

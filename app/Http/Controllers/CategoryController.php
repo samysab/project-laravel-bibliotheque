@@ -23,7 +23,7 @@ class CategoryController extends Controller
         $category = Category::find($request->category_id);
         $category->delete();
 
-        return redirect('category')->with('status', 'category Deleted !');
+        return redirect('category')->with('status', 'La catégorie a été supprimée');
     }
 
     //recevoir un post depuis un formulaire et le save en BDD
@@ -32,7 +32,7 @@ class CategoryController extends Controller
             'name' => ['required', 'max:255', 'min: 2'],
             'description' => ['required', 'min: 10', 'max: 255'],
         ],
-            [ 'name.required' => 'Le champs :attribute est requis.',
+            [ 'required' => 'Le champs :attribute est requis.',
                 'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
                 'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres'
 
@@ -66,6 +66,6 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect('/category')->with('status', 'Category Updated !');
+        return redirect('/category')->with('status', 'La catégorie a été modifiée');
     }
 }

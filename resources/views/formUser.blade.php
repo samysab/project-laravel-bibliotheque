@@ -20,9 +20,6 @@
                     <div style="color: red" class="alert alert-success">{{ $errors->first('email') }}</div>
                 @endif
 
-                @if ($errors->has('isAuthor'))
-                    <div style="color: red" class="alert alert-success">{{ $errors->first('isAuthor') }}</div>
-                @endif
 
                     <div class="p-6 bg-white border-b border-gray-200">
                     {!! Form::open(['route' => 'create-user']) !!}
@@ -30,7 +27,6 @@
                     {!! Form::email('email') !!}
                     {!! Form::password('password') !!}
                     {!! Form::password('password_confirmation') !!}
-                    {!! Form::number('isAuthor') !!}
                     {!! Form::submit('Créer un utilisateur'); !!}
                     {!! Form::close() !!}
 
