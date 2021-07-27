@@ -47,7 +47,7 @@ Route::post('/save',
 
 Route::get('/livres',
     [\App\Http\Controllers\BookController::class, 'index']
-)->middleware(['auth'])->name('books');
+)->middleware(['admin'])->name('books');
 
 Route::post('/livres',
     [\App\Http\Controllers\BookController::class, 'saveBook']
@@ -182,7 +182,7 @@ Route::get('/',
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['admin'])->name('dashboard');
 
 
 Route::get('/livre/{book_id}',
@@ -198,8 +198,7 @@ Route::get('/mes-livres', [UserController::class, 'myBooks']
 )->middleware(['auth'])->name('myBooks');
 
 Route::post('/saveBookUser', [BookController::class, 'saveBookUser']
-)->middleware(['auth'])->name('saveBookUser');
-
+)->middleware(['admin'])->name('saveBookUser');
 
 require __DIR__.'/auth.php';
 
