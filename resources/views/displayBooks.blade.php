@@ -22,7 +22,7 @@
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
                 <a href="{{ url('/mes-livres') }}" class="text-sm text-gray-700 underline">Mes livres</a>
-                <a href="{{ url('/logout') }}" class="text-sm text-gray-700 underline">Déconnexion</a>
+
             @else
                 <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
 
@@ -50,6 +50,7 @@
                         <ul>
                             @foreach ($books as $book)
                                 <li> {{ $book->name }}</li>
+                                <a href="/livre/{{ $book->id }}">Voir les commentaires</a>
                                 @if(  \Illuminate\Support\Facades\Auth::user() && !$book->buyed() )
                                 {!! Form::open(['route' => 'saveBookUser']) !!}
                                 {!! Form::hidden('book_id',$book->id); !!}
