@@ -159,6 +159,7 @@ class BookController extends Controller
         $userBook->book_id = $request->book_id;
         $userBook->save();
 
+
         return redirect("/")->with("status","Livre acheté");
     }
 }
