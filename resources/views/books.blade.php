@@ -20,19 +20,30 @@
                     @if ($errors->has('name'))
                         <div style="color: red" class="alert alert-success">{{ $errors->first('name') }}</div>
                     @endif
-                    <h1>Gestion des livres</h1>
-                    {!! Form::open(['route' => 'saveBook','files' => true], '') !!}
+                    @if ($errors->has('image'))
+                        <div style="color: red" class="alert alert-success">{{ $errors->first('image') }}</div>
+                    @endif
+                    {!! Form::open(['route' => 'saveBook','files' => true, 'enctype' => 'multipart/form-data'], '') !!}
+                        {!! Form::label('Nom') !!}
                         {!! Form::text('name') !!}
+                        <br>
+                        {!! Form::label('Description') !!}
                         {!! Form::textarea('description') !!}
+                        <br>
+                        {!! Form::label('Catégorie') !!}
                         {!! Form::select('category', $categoryName) !!}
+                        <br>
+                        {!! Form::label('Image') !!}
                         {!! Form::file('image') !!}
-                    {!! Form::submit('Ajouter'); !!}
+                        <br>
+                        {!! Form::submit('Ajouter'); !!}
                     {!! Form::close() !!}
                     <br><br>
                     <ul>
                         @foreach ($books as $book)
+                            <br>
                             @if(!empty($book->path))
-                            <img src="{{asset('storage/images').'/'.$book->path}}">
+                            <img width="200px" src="{{asset('storage/images').'/'.$book->path}}">
                             @endif
                             <li> {{ $book->name }}</b></i>
                             <li> {{ $book->description }}</b></i>

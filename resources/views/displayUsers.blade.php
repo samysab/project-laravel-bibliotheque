@@ -13,13 +13,15 @@
                         {{ session('status') }}
                     </div>
                 @endif
+
                 <div class="p-6 bg-white border-b border-gray-200">
                     <ul>
                         @foreach ($users as $user)
                             <li> {{ $user->name }}  </li>
                             <li> {{ $user->email }}  </li>
-                            <li> {{ $user->isAuthor === 0 ? "Utilisateur standard" : "Auteur" }}  </li>
-                            <li> [<a href="{{ route('delete', $user->id) }}">delete </a>] </li>
+                            <li> {{$user->isAuthor ? "Auteur" : "Utilisateur standard"}} </li>
+                            <li> [<a href="{{ route( $user->isAuthor ? 'delete-author' : 'delete-user' , $user->id) }}">delete </a>] </li>
+                            <li> [<a href="{{ route($user->isAuthor ? 'update-author' : 'update-user', $user->id) }}">Update </a>] </li>
                             <br>
                         @endforeach
                     </ul>
