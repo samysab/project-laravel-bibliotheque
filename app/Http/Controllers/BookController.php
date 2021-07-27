@@ -137,7 +137,7 @@ class BookController extends Controller
         $book = Book::find($request->book_id);
         $comments = $book->comments;
 
-        return view('infoBook', ['comments' => $comments]);
+        return view('infoBook', ['comments' => $comments, 'book' => $book, 'id' => $request->book_id]);
 
     }
 }
