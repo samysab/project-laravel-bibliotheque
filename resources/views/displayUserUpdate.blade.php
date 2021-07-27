@@ -25,6 +25,7 @@
                         <div style="color: red" class="alert alert-success">{{ $errors->first('old_password') }}</div>
                     @endif
 
+                        <div style="color: red" class="alert alert-">@include('flash::message')</div>
 
                 <div class="p-6 bg-white border-b border-gray-200">
                     {!! Form::open(['route' => ['update-user', $user->id ]]) !!}

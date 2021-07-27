@@ -88,14 +88,23 @@ class UserController extends Controller
 
         self::checkUser($request, false);
 
-        $data = User::where('id', $user->id)
-            ->update([
-                "name" => $request->name,
-                "email" => $request->email,
-                "password" => Hash::make($request->password)
-            ]);
+        if(self::checkOldPassword($request)) {
+            $data = User::where('id', $user->id)
+                ->update([
+                    "name" => $request->name,
+                    "email" => $request->email,
+                    "password" => Hash::make($request->password)
+                ]);
 
-        return redirect('users')->with('status', 'User updated !');
+            return redirect('users')->with('status', 'User updated !');
+        }else{
+
+//            return redirect()->route('update-user', ["user_id" => $request->user_id])->with('status',
+//                "L'ancien mot de passe ne correspond pas ! ");
+            flash( 'Votre ancien mot de passe ne correspond pas')->error();
+            return back();
+
+        }
     }
 
     function updateAuthor(Request $request){
@@ -178,14 +187,14 @@ class UserController extends Controller
                     'email.unique' => 'Adresse mail déjà existante'
                 ]
             );
-            
-            $user = new User();
-            if (Hash::check($request->old_password, $user->select("password")->where("id", "=", $request->user_id)->get())) {
-                echo "ok";
-            }else{
-                echo "ko";
-            }
         }
+    }
+
+    private static function checkOldPassword(Request $request)
+    {
+        $user = new User();
+        $data = $user->select("password")->where("id", $request->user_id)->get();
+        return Hash::check($request->old_password, $data[0]->password);
     }
 
     private static function checkAuthor(Request $request){
