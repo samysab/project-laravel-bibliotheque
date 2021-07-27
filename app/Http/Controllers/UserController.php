@@ -86,16 +86,25 @@ class UserController extends Controller
     function updateUser(Request $request){
         $user = User::find($request->user_id);
 
-        self::checkUser($request);
+        self::checkUser($request, false);
 
-        $data = User::where('id', $user->id)
-            ->update([
-                "name" => $request->name,
-                "email" => $request->email,
-                "password" => Hash::make($request->password)
-            ]);
+        if(self::checkOldPassword($request)) {
+            $data = User::where('id', $user->id)
+                ->update([
+                    "name" => $request->name,
+                    "email" => $request->email,
+                    "password" => Hash::make($request->password)
+                ]);
 
-        return redirect('users')->with('status', 'User updated !');
+            return redirect('users')->with('status', 'User updated !');
+        }else{
+
+//            return redirect()->route('update-user', ["user_id" => $request->user_id])->with('status',
+//                "L'ancien mot de passe ne correspond pas ! ");
+            flash( 'Votre ancien mot de passe ne correspond pas')->error();
+            return back();
+
+        }
     }
 
     function updateAuthor(Request $request){
@@ -128,28 +137,64 @@ class UserController extends Controller
         return view('displayAuthorUpdate', ['author' => $author]);
     }
 
-    private static function checkUser(Request $request){
+    private static function checkUser(Request $request, $isUser = true){
 
-        $validatedData = $request->validate([
-            'name' => ['required', 'max:255', 'min: 2', 'unique:users'],
-            'password' => 'required|confirmed|min:6',
-            'email' => ['required', 'unique:users'],
-//            'isAuthor' => ['required', Rule::in([0])]
+        if($isUser){
+            $validatedData = $request->validate(
+                [
+                    'name' => ['required', 'max:255', 'min: 2', 'unique:users'],
+                    'password' => 'required|confirmed|min:6',
+                    'email' => ['required', 'unique:users'],
 
-        ],
-            [
-                'name.required' => 'Le champs :attribute est requis.',
-                'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
-                'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
+                ],
+                [
+                    'name.required' => 'Le champs :attribute est requis.',
+                    'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
+                    'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
 
-                'password.required' => 'Entrez un mot de passe',
-                'confirmed' => 'Le mot de passe de confirmation ne correspond pas',
-                'password.min' => 'Votre mot de passe doit faire au minimum 6 caractères',
+                    'password.required' => 'Entrez un mot de passe',
+                    'confirmed' => 'Le mot de passe de confirmation ne correspond pas',
+                    'password.min' => 'Votre mot de passe doit faire au minimum 6 caractères',
 
-                'email.required' => 'Entrez votre email',
-                'email.unique' => 'Adresse mail déjà existante'
-            ]
-        );
+                    'email.required' => 'Entrez votre email',
+                    'email.unique' => 'Adresse mail déjà existante'
+                ]
+            );
+        }else{
+            $validatedData = $request->validate(
+                [
+                    'name' => ['required', 'max:255', 'min: 2',
+                        Rule::unique('users')->where(function ($query) {
+                        return $query->where('id', '<>', request()->user_id);
+                    })],
+                    'password' => 'required|confirmed|min:6',
+                    'email' => ['required',
+                        Rule::unique('users')->where(function ($query) {
+                            return $query->where('id', '<>', request()->user_id);
+                        })
+                    ],
+                ],
+                [
+                    'name.required' => 'Le champs :attribute est requis.',
+                    'max' => 'Le champs :attribute ne doit pas comporter plus de :max caracteres',
+                    'min' => 'Le champs :attribute ne doit pas comporter moins de :min caracteres',
+
+                    'password.required' => 'Entrez un mot de passe',
+                    'confirmed' => 'Le mot de passe de confirmation ne correspond pas',
+                    'password.min' => 'Votre mot de passe doit faire au minimum 6 caractères',
+
+                    'email.required' => 'Entrez votre email',
+                    'email.unique' => 'Adresse mail déjà existante'
+                ]
+            );
+        }
+    }
+
+    private static function checkOldPassword(Request $request)
+    {
+        $user = new User();
+        $data = $user->select("password")->where("id", $request->user_id)->get();
+        return Hash::check($request->old_password, $data[0]->password);
     }
 
     private static function checkAuthor(Request $request){
