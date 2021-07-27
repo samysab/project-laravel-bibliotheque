@@ -22,27 +22,27 @@ use App\Http\Controllers\BookController;
 
 Route::get('/category',
     [\App\Http\Controllers\CategoryController::class, 'index']
-)->middleware(['auth'])->name('category');
+)->middleware(['admin'])->name('category');
 
 Route::get('/delete-category/{category_id}', //url
     [\App\Http\Controllers\CategoryController::class, 'delete'] //nom de la methode
-)->middleware(['auth'])->name('delete-category'); //Nom de la route (route('')
+)->middleware(['admin'])->name('delete-category'); //Nom de la route (route('')
 
 Route::post('/create-category',
     [\App\Http\Controllers\CategoryController::class, 'post']
-)->middleware(['auth'])->name('create-category');
+)->middleware(['admin'])->name('create-category');
 
 Route::post('/save-category',
     [\App\Http\Controllers\CategoryController::class, 'save']
-)->middleware(['auth'])->name('save-category');
+)->middleware(['admin'])->name('save-category');
 
 Route::get('/update/{category_id}',
     [\App\Http\Controllers\CategoryController::class, 'update']
-)->middleware(['auth'])->name('update');
+)->middleware(['admin'])->name('update');
 
 Route::post('/save',
     [\App\Http\Controllers\CategoryController::class, 'save']
-)->middleware(['auth'])->name('save');
+)->middleware(['admin'])->name('save');
 
 
 Route::get('/livres',
@@ -51,26 +51,19 @@ Route::get('/livres',
 
 Route::post('/livres',
     [\App\Http\Controllers\BookController::class, 'saveBook']
-)->middleware(['auth'])->name('saveBook');
+)->middleware(['admin'])->name('saveBook');
 
 Route::get('/suppresion-livre/{book_id}',
     [\App\Http\Controllers\BookController::class, 'deleteBook']
-)->middleware(['auth'])->name('deleteBook');
+)->middleware(['admin'])->name('deleteBook');
 
 Route::get('/modification-livre/{book_id}',
     [\App\Http\Controllers\BookController::class, 'updateDisplayBook']
-)->middleware(['auth'])->name('updateDisplayBook');
+)->middleware(['admin'])->name('updateDisplayBook');
 
 Route::post('/sauvegarde-livres',
     [\App\Http\Controllers\BookController::class, 'updateBook']
-)->middleware(['auth'])->name('updateBook');
-
-
-
-Route::get('/films',
-    [FilmController::class, 'index']
-)->middleware(['auth'])->name('films');
-
+)->middleware(['admin'])->name('updateBook');
 
 
 // USER
@@ -78,58 +71,58 @@ Route::get('/films',
 // CREATE USER
 Route::post('/create-user',
     [UserController::class, 'createUser']
-)->middleware(['auth'])->name('create-user');
+)->middleware(['admin'])->name('create-user');
 
 Route::get('/create-user',
     [UserController::class, 'formUser']
-)->middleware(['auth'])->name('create-user');
+)->middleware(['admin'])->name('create-user');
 
 Route::post('/create-author',
     [UserController::class, 'createAuthor']
-)->middleware(['auth'])->name('create-author');
+)->middleware(['admin'])->name('create-author');
 
 Route::get('/create-author',
     [UserController::class, 'formAuthor']
-)->middleware(['auth'])->name('create-author');
+)->middleware(['admin'])->name('create-author');
 
 
 //LIST OF USERS
 
 Route::get('/users',
     [UserController::class, 'showUsers']
-)->middleware(['auth'])->name('users');
+)->middleware(['admin'])->name('users');
 
 Route::get('/authors',
     [UserController::class, 'showAuthors']
-)->middleware(['auth'])->name('authors');
+)->middleware(['admin'])->name('authors');
 
 //DELETE
 
 Route::get('/delete-user/{user_id}', //url
     [UserController::class, 'deleteUser'] //nom de la methode
-)->middleware(['auth'])->name('delete-user'); //Nom de la route (route('')
+)->middleware(['admin'])->name('delete-user'); //Nom de la route (route('')
 
 Route::get('/delete-author/{author_id}', //url
     [UserController::class, 'deleteAuthor'] //nom de la methode
-)->middleware(['auth'])->name('delete-author'); //Nom de la route (route('')
+)->middleware(['admin'])->name('delete-author'); //Nom de la route (route('')
 
 //UPDATE USER
 
 Route::post('/update-user/{user_id}',
     [UserController::class, 'updateUser']
-)->middleware(['auth'])->name('update-user');
+)->middleware(['admin'])->name('update-user');
 
 Route::get('/update-user/{user_id}',
     [UserController::class, 'formUserUpdate']
-)->middleware(['auth'])->name('update-user');
+)->middleware(['admin'])->name('update-user');
 
 Route::post('/update-author/{author_id}',
     [UserController::class, 'updateAuthor']
-)->middleware(['auth'])->name('update-author');
+)->middleware(['admin'])->name('update-author');
 
 Route::get('/update-author/{author_id}',
     [UserController::class, 'formAuthorUpdate']
-)->middleware(['auth'])->name('update-author');
+)->middleware(['admin'])->name('update-author');
 
 
 // ====================
@@ -142,14 +135,6 @@ Route::post('/wall',
     [WallController::class, 'post']
 )->middleware(['auth'])->name('post');
 
-/*Route::get('/update/{post_id}',
-    [WallController::class, 'update']
-)->middleware(['auth'])->name('update');
-
-Route::post('/save',
-    [WallController::class, 'save']
-)->middleware(['auth'])->name('save');
-*/
 
 
 Route::get('/delete-comment/{comment_id}', //url
