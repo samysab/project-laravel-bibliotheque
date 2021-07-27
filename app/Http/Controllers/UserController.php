@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -128,6 +129,15 @@ class UserController extends Controller
 
         return view('displayUserUpdate', ['user' => $user]);
     }
+
+
+    function myBooks(){
+
+        $myBooks = Auth::user()->UserBuyed;
+        return view('displayUserBooks',['books' => $myBooks]);
+  
+    }
+
 
     function formAuthorUpdate(Request $request){
         $author = User::find($request->author_id);

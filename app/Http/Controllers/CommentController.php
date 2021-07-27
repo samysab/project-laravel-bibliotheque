@@ -12,7 +12,6 @@ class CommentController extends Controller
     public function save(Request $request){
 
 
-
          $request->validate([
             'content' => ['required', 'max:255', 'min: 2'],
         ],
@@ -32,7 +31,6 @@ class CommentController extends Controller
         $comment->save();
 
         return back()->with("success","Commentaire envoyé !");
-
 
 
     }

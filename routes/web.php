@@ -192,6 +192,15 @@ Route::get('/livre/{book_id}',
 
 Route::post('/saveComment',
     [CommentController::class, 'save']
-)->name('create-comment');
+)->middleware(['auth'])->name('create-comment');
+
+Route::get('/mes-livres', [UserController::class, 'myBooks']
+)->middleware(['auth'])->name('myBooks');
+
+Route::post('/saveBookUser', [BookController::class, 'saveBookUser']
+)->middleware(['auth'])->name('saveBookUser');
+
 
 require __DIR__.'/auth.php';
+
+

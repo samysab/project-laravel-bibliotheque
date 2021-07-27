@@ -18,20 +18,7 @@
 </head>
 <body class="">
 <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-    @if (Route::has('login'))
-        <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            @auth
-                <a href="{{ url('/mes-livres') }}" class="text-sm text-gray-700 underline">Mes livres</a>
-                <a href="{{ url('/logout') }}" class="text-sm text-gray-700 underline">Déconnexion</a>
-            @else
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
 
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
 
@@ -46,17 +33,10 @@
                     @endif
                     <div class="p-6 bg-white border-b border-gray-200">
 
-                        <h1 class="">Library</h1>
+                        <h1 class="">Mes livres</h1>
                         <ul>
                             @foreach ($books as $book)
-                                <li> {{ $book->name }}</li>
-                                @if(  \Illuminate\Support\Facades\Auth::user() && !$book->buyed() )
-                                {!! Form::open(['route' => 'saveBookUser']) !!}
-                                {!! Form::hidden('book_id',$book->id); !!}
-                                {!! Form::submit('Acheter'); !!}
-                                {!! Form::close() !!}
-
-                                @endif
+                                <li> {{ $book->book->name }} | acheté le {{ $book->created_at }} </li>
                             @endforeach
                         </ul>
                         <br>
