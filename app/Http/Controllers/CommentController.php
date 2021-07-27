@@ -44,5 +44,6 @@ class CommentController extends Controller
         $comment->delete();
 
         return redirect("/livre/$getBook")->with("success","Commentaire supprimé");
+
     }
 }
