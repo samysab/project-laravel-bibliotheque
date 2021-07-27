@@ -22,6 +22,7 @@
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
                 <a href="{{ url('/mes-livres') }}" class="text-sm text-gray-700 underline">Mes livres</a>
+                <a href="{{ url('/logoutUser') }}" class="text-sm text-gray-700 underline">Déconnexion</a>
 
             @else
                 <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>

@@ -135,7 +135,7 @@ class UserController extends Controller
 
         $myBooks = Auth::user()->UserBuyed;
         return view('displayUserBooks',['books' => $myBooks]);
-  
+
     }
 
 
@@ -145,6 +145,11 @@ class UserController extends Controller
             ->get();
 
         return view('displayAuthorUpdate', ['author' => $author]);
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect("/");
     }
 
     private static function checkUser(Request $request, $isUser = true){

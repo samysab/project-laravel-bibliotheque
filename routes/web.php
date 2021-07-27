@@ -200,6 +200,9 @@ Route::get('/mes-livres', [UserController::class, 'myBooks']
 Route::post('/saveBookUser', [BookController::class, 'saveBookUser']
 )->middleware(['admin'])->name('saveBookUser');
 
+Route::get('/logoutUser', [UserController::class, 'logout']
+)->middleware(['auth'])->name('logoutUser');
+
 require __DIR__.'/auth.php';
 
 

@@ -25,7 +25,6 @@ class CommentController extends Controller
             ]
         );
 
-
         $comment = new Comment();
         $comment->content = $request->content;
         $comment->user_id = Auth::user()->id;
