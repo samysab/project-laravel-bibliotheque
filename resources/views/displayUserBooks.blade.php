@@ -36,6 +36,7 @@
                         <h1 class="">Mes livres</h1>
                         <ul>
                             @foreach ($books as $book)
+
                                 <li> {{ $book->book->name }} | acheté le {{ $book->created_at }} </li>
                             @endforeach
                         </ul>

@@ -134,6 +134,7 @@ class UserController extends Controller
     function myBooks(){
 
         $myBooks = Auth::user()->UserBuyed;
+
         return view('displayUserBooks',['books' => $myBooks]);
 
     }

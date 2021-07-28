@@ -50,13 +50,17 @@
                         <h1 class="">Library</h1>
                         <ul>
                             @foreach ($books as $book)
+                                <img width="200px" src="{{asset('storage/images').'/'.$book->path}}">
                                 <li> {{ $book->name }}</li>
-                                <a href="/livre/{{ $book->id }}">Voir les commentaires</a>
+                                <a href="/livre/{{ $book->id }}">Voir les commentaires</a><br><br>
                                 @if(  \Illuminate\Support\Facades\Auth::user() && !$book->buyed() )
                                 {!! Form::open(['route' => 'saveBookUser']) !!}
                                 {!! Form::hidden('book_id',$book->id); !!}
                                 {!! Form::submit('Acheter'); !!}
                                 {!! Form::close() !!}
+                                    <br>
+
+
 
                                 @endif
                             @endforeach
